@@ -16,34 +16,29 @@ import java.util.Map;
 @Slf4j
 @RequestMapping("/users")
 public class UserController {
-   private UserValidator userValidator = new UserValidator();
-   private Map<Integer, User> users = new HashMap<>();
+    private UserValidator userValidator = new UserValidator();
+    private Map<Integer, User> users = new HashMap<>();
 
     @PostMapping
-    public class UserController {
-        private UserValidator userValidator = new UserValidator();
-        private Map<Integer, User> users = new HashMap<>();
-
-        @PostMapping
-        public User addUser(@Valid @RequestBody User user) throws ValidationException {
-            if (userValidator.validate(user)) {
-                log.info(user.getId() + " зарегистрировался на сервисе");
-                users.put(user.getId(), user);
-            }
-            return user;
+    public User addUser(@Valid @RequestBody User user) throws ValidationException {
+        if (userValidator.validate(user)) {
+            log.info(user.getId() + " зарегистрировался на сервисе");
+            users.put(user.getId(), user);
         }
-
-        @PutMapping
-        public User updateUser(@Valid @RequestBody User user) throws ValidationException {
-            if (userValidator.validate(user)) {
-                log.info(user.getId() + " обновил учетную запись");
-                users.put(user.getId(), user);
-            }
-            return user;
-        }
-
-        @GetMapping
-        public List<User> getAll() {
-            return new ArrayList<>(users.values());
-        }
+        return user;
     }
+
+    @PutMapping
+    public User updateUser(@Valid @RequestBody User user) throws ValidationException {
+        if (userValidator.validate(user)) {
+            log.info(user.getId() + " обновил учетную запись");
+            users.put(user.getId(), user);
+        }
+        return user;
+    }
+
+    @GetMapping
+    public Collection<User> getAll() {
+        return users.values();
+    }
+}

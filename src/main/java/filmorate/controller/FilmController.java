@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class FilmController {
     private FilmsValidator filmsValidator = new FilmsValidator();
-    private Map<Integer,Film> films = new HashMap<>();
+    private final Map<Integer,Film> films = new HashMap<>();
 
     @PostMapping
     public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
@@ -39,7 +39,7 @@ public class FilmController {
     }
 
     @GetMapping
-    public List<Film> getAll() {
-        return new ArrayList<>(films.values());
+    public Collection<Film> getAll() {
+        return films.values();
     }
 }
