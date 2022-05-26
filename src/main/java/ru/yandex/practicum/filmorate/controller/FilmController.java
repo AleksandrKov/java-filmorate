@@ -43,7 +43,6 @@ public class FilmController {
         if(!films.containsKey(film.getId())) {
             log.error("попытка обновить фильм без указания id");
             throw new ValidationException("id", "не может быть пустым");
-
         }
         if (filmsValidator.validate(film)) {
             films.put(film.getId(), film);
