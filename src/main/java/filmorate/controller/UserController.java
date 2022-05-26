@@ -20,23 +20,30 @@ public class UserController {
    private Map<Integer, User> users = new HashMap<>();
 
     @PostMapping
-    public void addUser(@Valid @RequestBody User user) throws ValidationException {
-        if (userValidator.validate(user)) {
-            log.info(user.getId() + " зарегистрировался на сервисе");
-            users.put(user.getId(), user);
+    public class UserController {
+        private UserValidator userValidator = new UserValidator();
+        private Map<Integer, User> users = new HashMap<>();
+
+        @PostMapping
+        public User addUser(@Valid @RequestBody User user) throws ValidationException {
+            if (userValidator.validate(user)) {
+                log.info(user.getId() + " зарегистрировался на сервисе");
+                users.put(user.getId(), user);
+            }
+            return user;
+        }
+
+        @PutMapping
+        public User updateUser(@Valid @RequestBody User user) throws ValidationException {
+            if (userValidator.validate(user)) {
+                log.info(user.getId() + " обновил учетную запись");
+                users.put(user.getId(), user);
+            }
+            return user;
+        }
+
+        @GetMapping
+        public List<User> getAll() {
+            return new ArrayList<>(users.values());
         }
     }
-
-    @PutMapping
-    public void updateUser(@Valid @RequestBody User user) throws ValidationException {
-        if (userValidator.validate(user)) {
-            log.info(user.getId() + " обновил учетную запись");
-            users.put(user.getId(), user);
-        }
-    }
-
-    @GetMapping
-    public List<User> getAll() {
-        return new ArrayList<>(users.values());
-    }
-}

@@ -17,8 +17,8 @@ import java.util.Map;
 @RequestMapping("/films")
 
 public class FilmController {
-   private FilmsValidator filmsValidator = new FilmsValidator();
-   private Map<Integer,Film> films = new HashMap<>();
+    private FilmsValidator filmsValidator = new FilmsValidator();
+    private Map<Integer,Film> films = new HashMap<>();
 
     @PostMapping
     public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
@@ -30,11 +30,12 @@ public class FilmController {
     }
 
     @PutMapping
-    public void updateFilm(@Valid @RequestBody Film film) throws ValidationException {
+    public Film updateFilm(@Valid @RequestBody Film film) throws ValidationException {
         if (filmsValidator.validate(film)) {
             films.put(film.getId(), film);
             log.info(film.getName() + " обновлен");
         }
+        return film;
     }
 
     @GetMapping
