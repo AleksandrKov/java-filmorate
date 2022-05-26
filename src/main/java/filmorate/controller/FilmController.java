@@ -21,11 +21,12 @@ public class FilmController {
    private Map<Integer,Film> films = new HashMap<>();
 
     @PostMapping
-    public void addFilm(@Valid @RequestBody Film film) throws ValidationException {
+    public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
         if (filmsValidator.validate(film)) {
             films.put(film.getId(), film);
             log.info(film.getName() + " добавлен");
         }
+        return film;
     }
 
     @PutMapping
