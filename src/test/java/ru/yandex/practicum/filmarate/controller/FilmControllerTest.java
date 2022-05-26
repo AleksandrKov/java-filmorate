@@ -1,12 +1,14 @@
-package ru.yandex.practicum.filmorate.controller;
+package ru.yandex.practicum.filmarate.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.filmorate.controller.FilmController;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +24,9 @@ class FilmControllerTest {
         Film film = new Film(1, "Kino", "Description", LocalDate.parse("2000-01-01"),
                 Duration.ofMinutes(10));
         filmController.addFilm(film);
+        Collection<Film> films = filmController.getAll();
         assertTrue(filmController.getAll().contains(film));
+
     }
 
     @Test

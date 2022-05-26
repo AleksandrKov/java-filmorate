@@ -7,9 +7,8 @@ import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.validator.FilmsValidator;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,9 +18,19 @@ import java.util.Map;
 public class FilmController {
     private FilmsValidator filmsValidator = new FilmsValidator();
     private final Map<Integer,Film> films = new HashMap<>();
+    private int filmsCount = 0;
+
+    public int getFilmsCount() {
+        return filmsCount++;
+    }
 
     @PostMapping
     public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
+        if (films.containsKey(film.getId())) {
+            log.error("попытка заменить фильм");
+            throw new ValidationException("id", " фильм с таким id существует");
+        }
+        film.setId(getFilmsCount());
         if (filmsValidator.validate(film)) {
             films.put(film.getId(), film);
             log.info(film.getName() + " добавлен");
@@ -31,6 +40,11 @@ public class FilmController {
 
     @PutMapping
     public Film updateFilm(@Valid @RequestBody Film film) throws ValidationException {
+        if(!films.containsKey(film.getId())) {
+            log.error("попытка обновить фильм без указания id");
+            throw new ValidationException("id", "не может быть пустым");
+
+        }
         if (filmsValidator.validate(film)) {
             films.put(film.getId(), film);
             log.info(film.getName() + " обновлен");

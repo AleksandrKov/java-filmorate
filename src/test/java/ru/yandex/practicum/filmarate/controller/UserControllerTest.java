@@ -1,11 +1,13 @@
-package ru.yandex.practicum.filmorate.controller;
+package ru.yandex.practicum.filmarate.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.filmorate.controller.UserController;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -69,8 +71,10 @@ class UserControllerTest {
         user.setName("");
       //  assertThrows(ValidationException.class, () -> userController.addUser(user));
         userController.addUser(user);
-        final List<User> users = userController.getAll();
-        assertEquals(users.get(0).getName(), users.get(0).getLogin());
+        final Collection<User> users = userController.getAll();
+        for (User user1 : users) {
+            assertEquals(user1.getName(), user1.getLogin());
+        }
     }
 
     @Test
