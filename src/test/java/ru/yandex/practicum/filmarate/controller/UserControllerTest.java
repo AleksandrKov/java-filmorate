@@ -32,7 +32,7 @@ class UserControllerTest {
     public void addUserWithEmailBlankAndShouldBeException() {
         User user = new User(1, "A@yandex.ru", "tdesbillVasya", "Vasya",
                 LocalDate.parse("2000-01-01"));
-        user.setUserEmail("");
+        user.setEmail("");
         assertThrows(ValidationException.class, () -> userController.addUser(user));
         assertFalse(userController.getAll().contains(user));
     }
@@ -41,7 +41,7 @@ class UserControllerTest {
     public void addUserWithEmailWithoutDogAndShouldBeException() {
         User user = new User(1, "A@yandex.ru", "tdesbillVasya", "Vasya",
                 LocalDate.parse("2000-01-01"));
-        user.setUserEmail("QWE");
+        user.setEmail("QWE");
         assertThrows(ValidationException.class, () -> userController.addUser(user));
         assertFalse(userController.getAll().contains(user));
     }

@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 //@Builder
 public class Film {
@@ -22,7 +22,7 @@ public class Film {
     @NonNull
     private String description;
     @NonNull
-    private LocalDate dateRelease;
+    private LocalDate releaseDate;
     @NonNull
     private Duration duration;
 }

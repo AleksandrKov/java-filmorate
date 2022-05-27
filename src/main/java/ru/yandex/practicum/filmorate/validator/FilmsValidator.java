@@ -20,11 +20,12 @@ public class FilmsValidator {
             log.error("превышение максимальной длинны описания");
             throw new ValidationException("description", "максимальная длина — 200 символов");
         }
-        if (film.getDateRelease().isBefore(MIN_RELIES_DATE)) {
+        if (film.getReleaseDate().isBefore(MIN_RELIES_DATE)) {
             log.error("");
             throw new ValidationException("releaseDate", "должен быть не раньше 28 декабря 1895 года");
         }
         if (film.getDuration().isNegative()) {
+            System.out.println("tut");
             throw new ValidationException("duration", "должна быть положительной");
         }
         return true;

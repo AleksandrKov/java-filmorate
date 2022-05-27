@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping
     public User addUser(@Valid @RequestBody User user) throws ValidationException {
         if (users.containsKey(user.getId())) {
-            log.error("попытка заменить фильм");
+            log.error("попытка заменить пользователя");
             throw new ValidationException("id", " пользователь с таким id существует");
         }
         if (userValidator.validate(user)) {
@@ -38,10 +38,10 @@ public class UserController {
 
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) throws ValidationException {
-        if(!users.containsKey(user.getId())) {
-            log.error("попытка обновить пользователя без указания id");
-            throw new ValidationException("id", "не может быть пустым");
-        }
+  //      if(!users.containsKey(user.getId())) {
+  //          log.error("попытка обновить пользователя без указания id");
+   //         throw new ValidationException("id", "не может быть пустым");
+   //     }
         if (userValidator.validate(user)) {
             log.info(user.getId() + " обновил учетную запись");
             users.put(user.getId(), user);

@@ -62,7 +62,7 @@ class FilmControllerTest {
     void addFilmWithFalseDateReliesAndShouldBeException() {
         Film film = new Film(1, "Kino", "Description", LocalDate.parse("2000-01-01"),
                 Duration.ofMinutes(10));
-        film.setDateRelease((LocalDate.parse("1895-12-27")));
+        film.setReleaseDate((LocalDate.parse("1895-12-27")));
         assertThrows(ValidationException.class, () -> filmController.addFilm(film));
         assertFalse(filmController.getAll().contains(film));
     }

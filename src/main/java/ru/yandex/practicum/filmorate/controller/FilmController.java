@@ -25,7 +25,7 @@ public class FilmController {
     }
 
     @PostMapping
-    public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
+    public Film addFilm(@RequestBody Film film) throws ValidationException {
         if (films.containsKey(film.getId())) {
             log.error("попытка заменить фильм");
             throw new ValidationException("id", " фильм с таким id существует");
@@ -40,10 +40,10 @@ public class FilmController {
 
     @PutMapping
     public Film updateFilm(@Valid @RequestBody Film film) throws ValidationException {
-        if(!films.containsKey(film.getId())) {
-            log.error("попытка обновить фильм без указания id");
-            throw new ValidationException("id", "не может быть пустым");
-        }
+ //       if(!films.containsKey(film.getId())) {
+   //         log.error("попытка обновить фильм без указания id");
+     //       throw new ValidationException("id", "не может быть пустым");
+     //   }
         if (filmsValidator.validate(film)) {
             films.put(film.getId(), film);
             log.info(film.getName() + " обновлен");
@@ -53,6 +53,7 @@ public class FilmController {
 
     @GetMapping
     public Collection<Film> getAll() {
+        System.out.println("Collection<Film>");
         return films.values();
     }
 }

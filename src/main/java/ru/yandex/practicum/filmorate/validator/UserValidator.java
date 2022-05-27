@@ -10,11 +10,11 @@ import java.time.LocalDate;
 public class UserValidator {
 
     public static boolean validate(User user) {
-        if (!user.getUserEmail().contains("@") || user.getUserEmail().isBlank()) {
+        if (!user.getEmail().contains("@") || user.getEmail().isBlank()) {
             log.error("ошибка логирования без указания почты");
             throw new ValidationException("email", "не может быть пустой и должна содержать символ @");
         }
-        if (user.getLogin().contains(" ") || user.getLogin().isBlank()) {
+        if (user.getLogin().isBlank()) {
             log.error("ошибка в логине");
             throw new ValidationException("login", "не может быть пустым и содержать пробелы");
         }
