@@ -2,11 +2,9 @@ package ru.yandex.practicum.filmorate.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.time.LocalDate;
 
@@ -16,13 +14,13 @@ import java.time.LocalDate;
 //@Builder
 public class Film {
     private int id;
-    @NonNull
+    @NotNull
     @NotBlank
     private String name;
-    @NonNull
+    @NotNull
     private String description;
-    @NonNull
+    @NotNull
     private LocalDate releaseDate;
-    @NonNull
+    @NotNull
     private Duration duration;
 }

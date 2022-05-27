@@ -40,10 +40,6 @@ public class FilmController {
 
     @PutMapping
     public Film updateFilm(@Valid @RequestBody Film film) throws ValidationException {
- //       if(!films.containsKey(film.getId())) {
-   //         log.error("попытка обновить фильм без указания id");
-     //       throw new ValidationException("id", "не может быть пустым");
-     //   }
         if (filmsValidator.validate(film)) {
             films.put(film.getId(), film);
             log.info(film.getName() + " обновлен");
