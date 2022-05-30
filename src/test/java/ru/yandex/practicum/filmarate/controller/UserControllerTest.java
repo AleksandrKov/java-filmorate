@@ -66,7 +66,6 @@ class UserControllerTest {
         User user = new User(1, "A@yandex.ru", "thdesbillVasya", "Vasya",
                 LocalDate.parse("2000-01-01"));
         user.setName("");
-      //  assertThrows(ValidationException.class, () -> userController.addUser(user));
         userController.addUser(user);
         final Collection<User> users = userController.getAll();
         for (User user1 : users) {
