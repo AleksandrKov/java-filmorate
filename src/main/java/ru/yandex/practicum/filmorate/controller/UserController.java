@@ -17,7 +17,7 @@ import java.util.Map;
 public class UserController {
     private UserValidator userValidator = new UserValidator();
     private Map<Integer, User> users = new HashMap<>();
-    private int userCount = 0;
+    private int userCount = 1;
 
     public int getUserCount() {
         return userCount++;
@@ -25,6 +25,7 @@ public class UserController {
 
     @PostMapping
     public User addUser(@Valid @RequestBody User user) throws ValidationException {
+        System.out.println(user);
         if (users.containsKey(user.getId())) {
             log.error("попытка заменить пользователя");
             throw new ValidationException("id", " пользователь с таким id существует");
@@ -38,6 +39,7 @@ public class UserController {
 
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) throws ValidationException {
+        System.out.println(user);
         if (userValidator.validate(user)) {
             log.info(user.getId() + " обновил учетную запись");
             users.put(user.getId(), user);
