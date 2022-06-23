@@ -3,6 +3,7 @@ package ru.yandex.practicum.filmorate.validator;
 import lombok.extern.slf4j.Slf4j;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
+
 import java.time.LocalDate;
 
 @Slf4j
@@ -24,8 +25,7 @@ public class FilmsValidator {
             log.error("");
             throw new ValidationException("releaseDate", "должен быть не раньше 28 декабря 1895 года");
         }
-        if (film.getDuration().isNegative()) {
-            System.out.println("tut");
+        if (film.getDuration() <= 0) {
             throw new ValidationException("duration", "должна быть положительной");
         }
         return true;
