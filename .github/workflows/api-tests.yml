@@ -37,4 +37,4 @@ jobs:
 
       - name: Test API POSTMAN
         run: |
-          newman run ./postman/sprint1.json -r cli
+          newman run ./postman/sprint.json -r cli
