@@ -29,7 +29,6 @@ public class FilmController {
 
     @PutMapping
     public Film updateFilm(@RequestBody Film film) {
-        System.out.println(film);
         return filmService.updateFilm(film);
     }
 
@@ -49,7 +48,7 @@ public class FilmController {
     }
 
     @DeleteMapping("/{id}/like/{userId}")
-    public Film delLikeToFilm(@PathVariable Integer id, @PathVariable Integer userId) {
+    public Film deleteLikeToFilm(@PathVariable Integer id, @PathVariable Integer userId) {
         return filmService.delLikeToFilm(id, userId);
     }
 

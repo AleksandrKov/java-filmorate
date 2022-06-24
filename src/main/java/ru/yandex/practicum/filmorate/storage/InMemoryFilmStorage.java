@@ -74,7 +74,7 @@ public class InMemoryFilmStorage implements FilmStorage{
     @Override
     public Film delLikeToFilm(Integer filmId, Integer userId) throws LikeNotFoundException {
         Film film = films.get(filmId);
-        if (!film.delLikes(userId)) {
+        if (!film.deleteLikes(userId)) {
             log.error("попытка удаления не существующего лайка");
             throw new LikeNotFoundException("Лайк " + userId + " не найден");
         }
